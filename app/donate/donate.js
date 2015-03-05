@@ -9,34 +9,35 @@ angular.module('myApp.donate', ['ngRoute'])
   });
 }])
 
-.controller('donateCtrl', [function() {
+.controller('donateCtrl', ['$scope', function($scope) {
     Stripe.setPublishableKey('pk_test_ULZQ02ywV1lxC0kzlI9PkEd5');
 
     var stripeResponseHandler = function(status, response) {
         console.log(response);
     };
 
-    jQuery(function($) {
-        $('.donation-form').submit(function(event) {
-            var $form = $(this);
+    jQuery('.donation-form').submit(function(event) {
+        var form = jQuery(this);
 
-            // Disable the submit button to prevent repeated clicks
-            $form.find('button').prop('disabled', true);
+        // Disable the submit button to prevent repeated clicks
+        form.find('button').prop('disabled', true);
 
-            Stripe.card.createToken({
-                number: 4242424242424242,
-                cvc: 123,
-                exp_month: 12,
-                exp_year: 2016
-            }, stripeResponseHandler);
-            //Stripe.card.createToken($form, stripeResponseHandler);
+        Stripe.card.createToken({
+            number: $scope.cardNumber,
+            cvc: $scope.cardCvc,
+            exp_month: $scope.cardExpiry.month,
+            exp_year: $scope.cardExpiry.year
+        }, stripeResponseHandler);
+        console.log($scope.cardNumber);
+        console.log($scope.cardExpiry);
+        console.log($scope.cardCvc);
+        //Stripe.card.createToken($form, stripeResponseHandler);
 
-            // Prevent the form from submitting with the default action
-            return false;
-        });
+        // Prevent the form from submitting with the default action
+        return false;
     });
 
-    $(function() {
+    jQuery(function() {
       luminateExtend.init({
         apiKey: 'api_key',
         path: {

@@ -56,7 +56,7 @@
     <h1>Sponsor a bro.</h1>
     <hr>
     <p>You can be a part of the solution &ndash; make a donation to help fund important research. We can't do it without you.</p>
-    <form class="custom luminateApi donation-form" method="POST" action="http://bvtpacker1301.bvtpacker13.conviocloud.com/site/CRDonationAPI" data-luminateApi='{"callback": "donateCallback"}'>
+    <form class="custom luminateApi donation-form" method="POST" action="" data-luminateApi='{"callback": "donateCallback"}'>
       <input type="hidden" name="method" value="donate">
       <input type="hidden" name="form_id" value="1234">
       <input type="hidden" name="validate" value="true">
@@ -264,11 +264,12 @@
       <div class="panel donation-panel">
         <h2>Payment Information</h2>
         <div class="row">
+
           <div class="small-12 large-3 columns">
             <label class="right inline">Card Number:</label>
           </div>
           <div class="small-12 large-8 pull-1 columns">
-            <input type="text" name="card_number">
+            <card-number-input class="form-control" ng-model="cardNumber" card-type="cardType" data-stripe="number"></card-number-input>
           </div>
         </div>
         <div class="row">
@@ -276,39 +277,15 @@
             <label class="right inline">CVV:</label>
           </div>
           <div class="small-12 large-2 pull-7 columns">
-            <input type="text" name="card_cvv">
+            <card-cvc-input class="form-control" ng-model="cardCvc" data-stripe="cvc"></card-cvc-input>
           </div>
         </div>
         <div class="row">
           <div class="small-12 large-3 columns">
             <label class="right inline">Expiration Date:</label>
           </div>
-          <div class="small-12 large-3 columns">
-            <select name="card_exp_date_month">
-              <option>Month</option>
-              <option value="01">01</option>
-              <option value="02">02</option>
-              <option value="03">03</option>
-              <option value="04">04</option>
-              <option value="05">05</option>
-              <option value="06">06</option>
-              <option value="07">07</option>
-              <option value="08">08</option>
-              <option value="09">09</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-              <option value="12">12</option>
-            </select>
-          </div>
-          <div class="small-12 large-3 pull-3 columns">
-            <select name="card_exp_date_year">
-              <option>Year</option>
-              <option value="2015">2015</option>
-              <option value="2016">2016</option>
-              <option value="2017">2017</option>
-              <option value="2018">2018</option>
-              <option value="2019">2019</option>
-            </select>
+          <div class="small-12 large-2 pull-7 columns">
+            <card-expiry-input class="form-control" ng-model="cardExpiry" data-stripe="exp-month"></card-expiry-input>
           </div>
         </div>
       </div>
