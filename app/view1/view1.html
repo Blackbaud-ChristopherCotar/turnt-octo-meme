@@ -1,0 +1,19 @@
+<p>This is the partial for view 1.</p>
+
+<form name="cardExpiryForm" novalidate="">
+    <card-expiry-input class="form-control" name="ccExpiry" ng-model="cardExpiry"></card-expiry-input>
+</form>
+<hr/>
+<pre>Expiry: <b>{{cardExpiry || 'undefined'}}</b> - Valid: <i>{{!cardExpiryForm.$invalid}}</i></pre>
+
+<form name="cardForm" novalidate="">
+    <card-number-input class="form-control" name="ccNumber" ng-model="cardNumber" card-type="cardType"></card-number-input>
+</form>
+<hr/>
+<pre>Card Type: <b>{{cardType || 'unknown'}}</b> - Valid: <i>{{!cardForm.$invalid}}</i></pre>
+
+<form name="cardCvcForm" novalidate="">
+    <card-cvc-input class="form-control" name="ccCvc" ng-model="cardCvc"></card-cvc-input>
+</form>
+<hr/>
+<pre>Valid: <i>{{!cardCvcForm.$invalid}}</i></pre>
