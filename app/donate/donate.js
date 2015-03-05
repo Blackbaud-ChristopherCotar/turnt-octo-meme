@@ -10,12 +10,38 @@ angular.module('myApp.donate', ['ngRoute'])
 }])
 
 .controller('donateCtrl', [function() {
+    Stripe.setPublishableKey('pk_test_ULZQ02ywV1lxC0kzlI9PkEd5');
+
+    var stripeResponseHandler = function(status, response) {
+        console.log(response);
+    };
+
+    jQuery(function($) {
+        $('.donation-form').submit(function(event) {
+            var $form = $(this);
+
+            // Disable the submit button to prevent repeated clicks
+            $form.find('button').prop('disabled', true);
+
+            Stripe.card.createToken({
+                number: 4242424242424242,
+                cvc: 123,
+                exp_month: 12,
+                exp_year: 2016
+            }, stripeResponseHandler);
+            //Stripe.card.createToken($form, stripeResponseHandler);
+
+            // Prevent the form from submitting with the default action
+            return false;
+        });
+    });
+
     $(function() {
       luminateExtend.init({
-        apiKey: 'open',
+        apiKey: 'api_key',
         path: {
-          nonsecure: 'http://localhost/site/',
-          secure: 'https://secure2.convio.net/myorg/site/'
+          nonsecure: 'http://bvtpacker1301.bvtpacker13.conviocloud.com/site/',
+          secure: 'https://secure-bvtpacker13.conviocloud.com/bvtpacker1301/site/'
         }
       });
 
