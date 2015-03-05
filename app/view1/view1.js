@@ -19,14 +19,15 @@ angular.module('myApp.view1', ['ngRoute'])
             }
         });
 
-        var myLoginTestCallback = function(data) {
+        var logConsole = function(data) {
             console.log(data);
         };
 
-        luminateExtend.api({
+        luminateExtend.api.request({
             api: 'cons',
-            callback: myLoginTestCallback,
-            data: 'method=loginTest'
+            requestType: 'POST',
+            callback: logConsole,
+            data: 'method=login&user_name=api_guy&password=api_guy&remember_me=true'
         });
     });
 }]);
