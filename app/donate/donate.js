@@ -9,7 +9,7 @@ angular.module('myApp.donate', ['ngRoute'])
   });
 }])
 
-.controller('donateCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
+.controller('donateCtrl', ['$scope', '$http', '$location', '$rootScope', function($scope, $http, $location, $rootScope) {
     jQuery.support.cors = true;
     $http.defaults.useXDomain = true;
     $scope.formId = 1215;
@@ -22,66 +22,39 @@ angular.module('myApp.donate', ['ngRoute'])
       console.log(response);
       $scope.tokenID = response.id;
 
-      $.ajax({
-        type: "POST",
-        url: 'https://secure-bvtpacker13.conviocloud.com/bvtpacker1301/site/CRDonationAPI',
-        data: {
-          v: '1.0',
-          api_key: 'api_key',
-          response_format: 'json',
-          level_id: '1606',
-          method: $scope.method,
-          form_id: $scope.formId,
-          validate: $scope.validate,
-          tokenID: $scope.tokenID,
-          'billing.address.city': 'austin',
-          'billing.address.state': 'TX',
-          'billing.address.street1': 'street 1',
-          'billing.address.zip': '78787',
-          'billing.name.first': 'a',
-          'billing.name.last': 'a',
-          'donor.email': 'a@a.com'
-        },
-        crossDomain: true,
-        success: function() { console.log("yay this is posting to LO"); $location.path('/thanks');},
-        error: function() { console.log("error"); $location.path('/thanks');},
-        //dataType: 'jsonp',
-        xhrFields: {
-          withCredentials: true
-        }
-      });
+      var data = {
+        v: '1.0',
+        api_key: 'api_key',
+        response_format: 'json',
+        level_id: '1606',
+        method: $scope.method,
+        form_id: $scope.formId,
+        validate: $scope.validate,
+        tokenID: $scope.tokenID,
+        'billing.address.city': 'austin',
+        'billing.address.state': 'TX',
+        'billing.address.street1': 'street 1',
+        'billing.address.zip': '78787',
+        'billing.name.first': 'a',
+        'billing.name.last': 'a',
+        'donor.email': 'a@a.com'
+      };
+      console.log(data);
 
-      //
-      //$http({
-      //  url: 'https://secure-bvtpacker13.conviocloud.com/bvtpacker1301/CRDonationAPI',
-      //  data: {
-      //    v: '1.0',
-      //    api_key: 'api_key',
-      //    response_format: 'json',
-      //    level_id: '1606',
-      //    method: $scope.method,
-      //    form_id: $scope.formId,
-      //    validate: $scope.validate,
-      //    tokenID: $scope.tokenID,
-      //    'billing.address.city': 'austin',
-      //    'billing.address.state': 'TX',
-      //    'billing.address.street1': 'street 1',
-      //    'billing.address.zip': '78787',
-      //    'billing.name.first': 'a',
-      //    'billing.name.last': 'a',
-      //    'donor.email': 'a@a.com'
-      //  },
-      //  method: 'POST',
-      //  withCredentials: true
-      //
-      //})
-      //  .success(function (data, status, headers, config) {
-      //    alert(data);
-      //    console.log(headers);
-      //  }).error(function (data, status, headers, config) {
-      //    alert(data);
-      //    console.log(headers);
-      //  });
+      luminateExtend.api.request({
+        api: 'donation',
+        requestType: 'POST',
+        xhrFields: {
+          withCredentials: false
+        },
+        callback: function(data) {
+          $rootScope.$apply(function() {
+            $location.path("/thanks");
+            console.log($location.path());
+          });
+        },
+        data: jQuery.param(data)
+      });
     };
 
     jQuery('#donate-submit').click(function(event) {
@@ -118,7 +91,7 @@ angular.module('myApp.donate', ['ngRoute'])
       luminateExtend.init({
         apiKey: 'api_key',
         path: {
-          nonsecure: 'http://bvtpacker1301.bvtpacker13.conviocloud.com/site/',
+          nonsecure: 'http://bvtsup1.conviocloud.com/bvtsup110/site/',
           secure: 'https://secure-bvtpacker13.conviocloud.com/bvtpacker1301/site/'
         }
       });
