@@ -91,7 +91,7 @@
             <label class="right inline">First Name:</label>
           </div>
           <div class="small-12 large-8 pull-1 columns">
-            <input type="text" name="billing.name.first">
+            <input type="text" name="billing.name.first" ng-model="first">
           </div>
         </div>
         <div class="row">
@@ -99,7 +99,7 @@
             <label class="right inline">Last Name:</label>
           </div>
           <div class="small-12 large-8 pull-1 columns">
-            <input type="text" name="billing.name.last">
+            <input type="text" name="billing.name.last" ng-model="last">
           </div>
         </div>
         <div class="row">
@@ -107,7 +107,7 @@
             <label class="right inline">Street 1:</label>
           </div>
           <div class="small-12 large-8 pull-1 columns">
-            <input type="text" name="billing.address.street1">
+            <input type="text" name="billing.address.street1" ng-model="street1">
           </div>
         </div>
         <div class="row">
@@ -123,7 +123,7 @@
             <label class="right inline">City:</label>
           </div>
           <div class="small-12 large-8 pull-1 columns">
-            <input type="text" name="billing.address.city">
+            <input type="text" name="billing.address.city" ng-model="city">
           </div>
         </div>
         <div class="row">
@@ -131,7 +131,7 @@
             <label class="right inline">State:</label>
           </div>
           <div class="small-12 large-8 pull-1 columns">
-            <select name="billing.address.state">
+            <select name="billing.address.state" ng-model="state">
               <option>State</option>
               <option value="AK">AK</option>
               <option value="AL">AL</option>
@@ -217,7 +217,7 @@
             <label class="right inline">ZIP Code:</label>
           </div>
           <div class="small-12 large-3 pull-6 columns">
-            <input type="text" name="billing.address.zip">
+            <input type="text" name="billing.address.zip" ng-model="zip">
           </div>
         </div>
       </div>
@@ -229,7 +229,7 @@
             <label class="right inline">Email Address:</label>
           </div>
           <div class="small-12 large-8 pull-1 columns">
-            <input type="text" name="donor.email">
+            <input type="text" name="donor.email" ng-model="email">
           </div>
         </div>
         <div class="row">

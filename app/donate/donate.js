@@ -12,10 +12,18 @@ angular.module('myApp.donate', ['ngRoute'])
 .controller('donateCtrl', ['$scope', '$http', '$location', '$rootScope', function($scope, $http, $location, $rootScope) {
     jQuery.support.cors = true;
     $http.defaults.useXDomain = true;
-    $scope.formId = 1215;
+    $scope.formId = 1015;
     $scope.method = 'donate';
     $scope.validate = 'true';
     $scope.tokenID = '';
+    $scope.zip='';
+    $scope.state='';
+    $scope.city='';
+    $scope.street1='';
+    $scope.first='';
+    $scope.last='';
+    $scope.email='';
+
     Stripe.setPublishableKey('pk_test_ULZQ02ywV1lxC0kzlI9PkEd5');
 
     var stripeResponseHandler = function (status, response) {
@@ -26,18 +34,18 @@ angular.module('myApp.donate', ['ngRoute'])
         v: '1.0',
         api_key: 'api_key',
         response_format: 'json',
-        level_id: '1606',
+        level_id: '1046',
         method: $scope.method,
         form_id: $scope.formId,
         validate: $scope.validate,
         tokenID: $scope.tokenID,
-        'billing.address.city': 'austin',
-        'billing.address.state': 'TX',
-        'billing.address.street1': 'street 1',
-        'billing.address.zip': '78787',
-        'billing.name.first': 'a',
-        'billing.name.last': 'a',
-        'donor.email': 'a@a.com'
+        'billing.address.city': $scope.city,
+        'billing.address.state': $scope.state,
+        'billing.address.street1': $scope.street1,
+        'billing.address.zip': $scope.zip,
+        'billing.name.first': $scope.first,
+        'billing.name.last': $scope.last,
+        'donor.email': $scope.email
       };
       console.log(data);
 
@@ -48,6 +56,7 @@ angular.module('myApp.donate', ['ngRoute'])
           withCredentials: false
         },
         callback: function(data) {
+          console.log(data);
           $rootScope.$apply(function() {
             $location.path("/thanks");
             console.log($location.path());
@@ -105,12 +114,5 @@ angular.module('myApp.donate', ['ngRoute'])
         });
         console.log(luminateExtend.global);
       };
-
-      luminateExtend.api.request({
-        api: 'cons',
-        requestType: 'POST',
-        callback: logConsole,
-        data: 'method=login&user_name=api_guy&password=api_guy&remember_me=true'
-      });
     });
 }]);
