@@ -11,6 +11,4 @@ angular.module('myApp', [
 ]).
 config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
   $routeProvider.otherwise({redirectTo: '/home'});
-  $httpProvider.defaults.useXDomain = true;
-  delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }]);

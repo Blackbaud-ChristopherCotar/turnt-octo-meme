@@ -30,24 +30,6 @@
           </ul>
         </li>
       </ul>
-      <ul class="right">
-        <li class="has-form">
-          <form class="luminateApi hide" id="login-form" method="POST" action="http://shortname.convio.net/site/CRConsAPI" data-luminateApi='{"callback": "loginCallback"}'>
-            <input type="hidden" name="method" value="login">
-            <div class="row collapse">
-              <div class="small-5 columns">
-                <input type="text" id="login-username" name="user_name" placeholder="Username">
-              </div>
-              <div class="small-5 columns">
-                <input type="password" id="login-password" name="password" placeholder="Password">
-              </div>
-              <div class="small-2 columns">
-                <button type="submit" class="success button">Login</button>
-              </div>
-            </div>
-          </form>
-        </li>
-      </ul>
     </section>
   </nav>
 </div>
@@ -56,11 +38,11 @@
     <h1>Sponsor a bro.</h1>
     <hr>
     <p>You can be a part of the solution &ndash; make a donation to help fund important research. We can't do it without you.</p>
-    <form class="custom luminateApi donation-form" method="POST" action="" data-luminateApi='{"callback": "donateCallback"}'>
-      <input type="hidden" name="method" value="donate">
-      <input type="hidden" name="form_id" value="1234">
-      <input type="hidden" name="validate" value="true">
-      <input type="hidden" name="tokenID" value=""> <!-- set this in the callback -->
+    <form class="custom luminateApi donation-form">
+      <input type="hidden" name="method" ng-model="method">
+      <input type="hidden" name="form_id" ng-model="formId">
+      <input type="hidden" name="validate" ng-model="validate">
+      <input type="hidden" name="tokenID" ng-model="tokenID"> <!-- set this in the callback -->
       <div class="panel donation-panel radius">
         <h2>Donation Information</h2>
         <div class="row">
@@ -292,7 +274,7 @@
 
       <div class="row">
         <div class="small-12 columns">
-          <button type="submit" class="button small" id="donate-submit">Complete Donation</button>
+          <button type="button" class="button small" id="donate-submit">Complete Donation</button>
         </div>
       </div>
     </form>
